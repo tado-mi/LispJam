@@ -116,6 +116,40 @@
   (nth-primeh n 1 2)
 )
 
+(defun sumh (n factor ans)
+  (if (eq factor 0)
+    ; base case
+    ans
+    ; recurse
+    (if (is_factor n factor)
+      ; add factor
+      (sumh n (- factor 1) (+ ans factor))
+      ; do not add factor
+      (sumh n (- factor 1) ans)
+    )
+  )
+)
+
+
+(defun sum_factors (n)
+  (sumh n (- n 1) 0)
+)
+
+; perfect number: sum of factors equals to itself
+(defun perfectp (n)
+  (eq (sum_factors n) n)
+)
+
+; abundant number: sum of factors greater than itself
+(defun abundantp (n)
+  (> (sum_factors n) n)
+)
+
+; deficinet number: sum of factors less than itself
+(defun deficientp (n)
+  (< (sum_factors n) n)
+)
+
 ; math
 (defun math ()
   (print "1. abs: -10")
@@ -134,5 +168,18 @@
   (print (primep 11))
   (print "8. nth-prime: 26")
   (print (nth-prime 26))
+  (print "")
+  (print "9. perfectp: 5")
+  (print (perfectp 5))
+  (print "perfectp: 6")
+  (print (perfectp 6))
+  (print "10. abundantp: 5")
+  (print (abundantp 5))
+  (print "abundantp: 6")
+  (print (abundantp 6))
+  (print "11. deficientp: 5")
+  (print (deficientp 5))
+  (print "deficientp: 6")
+  (print (deficientp 6))
   (print "")
 )
